@@ -68,7 +68,7 @@ jobs:
 
       - name: Отправить webhook после деплоя
         run: |
-          curl -X POST https://your-api-domain.com/webhook \
+          curl -X POST https://858a-94-131-100-189.ngrok-free.app/webhook \
             -H "Content-Type: application/json" \
             -d '{
               "environment": "prod",
