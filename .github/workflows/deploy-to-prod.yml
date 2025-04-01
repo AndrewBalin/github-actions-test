@@ -71,6 +71,6 @@ jobs:
           curl -X POST https://858a-94-131-100-189.ngrok-free.app/webhook \
             -H "Content-Type: application/json" \
             -d '{
-              "environment": "prod",
+              "environment": "test",
               "branches": "${{ github.event.inputs.branches || 'dev' }}"
             }'
