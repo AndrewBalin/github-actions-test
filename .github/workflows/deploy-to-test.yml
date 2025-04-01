@@ -17,6 +17,7 @@ jobs:
           git config user.email "github-actions@github.com"
           git config --global url."https://${{ secrets.USERNAME }}:${{ secrets.TOKEN }}@github.com".insteadOf "https://github.com"
           git fetch origin test
+          git fetch origin dev
           git checkout test --
           git merge --no-ff dev --allow-unrelated-histories
           git push origin test
