@@ -1,0 +1,31 @@
+name: Pull Request tests
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  lint-and-test-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Установка зависимостей
+        run: |
+            echo "Installing dependencies..."
+#        npm install
+
+      - name: Форматтер
+        run: |
+            echo "Running prettier..."
+#        npx prettier --check .
+
+      - name: Тесты
+        run: | 
+            echo "Running tests..."
+#        npm test

@@ -1,0 +1,51 @@
+name: Deploy to Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  merge-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+
+      - name: Слияние ветки dev в test
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git fetch origin test
+          git checkout test
+          git merge --no-ff dev
+          git push origin test
+
+      - name: Установка зависимостей и билд
+        run: |
+          echo "Deploying to test server..."
+#          npm install
+#          npm run build
+
+      - name: Деплой на тестовый сервер
+        run: |
+          echo "Deploying to test server..."
+      #        uses: appleboy/ssh-action@master
+      #        with:
+      #          host: ${{ secrets.TEST_HOST }}
+      #          username: ${{ secrets.TEST_USER }}
+      #          key: ${{ secrets.SSH_KEY }}
+      #          script: |
+      #            cd /path/to/test-env
+      #            git pull origin test
+      #            npm install --production
+      #            npm run migrate # если есть миграции
+      #            npm run restart # рестарт приложения
+
+      - name: Отправить webhook после деплоя
+        run: |
+          curl -X POST https://your-api-domain.com/webhook \
+            -H "Content-Type: application/json" \
+            -d '{
+              "environment": "test",
+              "branches": "${{ github.event.inputs.branches || 'dev' }}"
+            }'
