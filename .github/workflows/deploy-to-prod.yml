@@ -23,7 +23,7 @@ jobs:
           IFS=',' read -ra branches <<< "${{ github.event.inputs.branches }}"
           for branch in "${branches[@]}"; do
             git fetch origin $branch
-            git merge --no-ff origin/$branch
+            git merge --no-ff origin/$branch --allow-unrelated-histories
           done
           git push origin main
 
